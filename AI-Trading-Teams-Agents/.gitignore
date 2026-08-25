@@ -14,7 +14,10 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# Anchored to repo root: an unanchored "lib/" would also match
+# frontend/lib/ (the Next.js app's TS helpers), silently dropping it
+# from every commit.
+/lib/
 lib64/
 parts/
 sdist/
