@@ -9,6 +9,7 @@ waiting for the whole multi-agent run.
 from __future__ import annotations
 
 import json
+import os
 import re
 from datetime import date as date_cls
 from pathlib import Path
@@ -25,9 +26,12 @@ from .graph_runner import run_analysis  # noqa: E402
 
 app = FastAPI(title="Trading-Analysts-Team API")
 
+# Comma-separated list, e.g. "https://myapp.vercel.app,http://localhost:3000".
+# Defaults to local dev only so a forgotten env var fails closed, not open.
+_allowed_origins = os.getenv("BACKEND_ALLOWED_ORIGINS", "http://localhost:3000")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[origin.strip() for origin in _allowed_origins.split(",") if origin.strip()],
     allow_methods=["GET"],
     allow_headers=["*"],
 )
