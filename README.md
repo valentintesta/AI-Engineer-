@@ -1,6 +1,6 @@
 # AI Engineer Portfolio
 
-A collection of AI-powered projects spanning resume analysis, venture capital due diligence, and no-code automation workflows.
+A collection of AI-powered projects spanning resume analysis, venture capital due diligence, RAG over YouTube videos, AI video generation, and no-code automation workflows.
 
 ---
 
@@ -41,6 +41,26 @@ A library of production automation workflows built without custom backend code. 
 
 ---
 
+### Rag-Youtube-Chat — Chat with Any YouTube Video
+
+A RAG (Retrieval-Augmented Generation) app that lets you chat with a YouTube video. Paste a link and the app fetches the transcript, splits it into overlapping chunks, embeds them, and stores them in a local FAISS index (one per video). Each question is embedded, matched against the top 4 most similar chunks, and answered by the LLM using only those excerpts, so answers stay grounded in what the video actually says. Every answer comes back with its source excerpts and similarity scores for verification.
+
+Built with Next.js 16 (App Router), React 19, TypeScript, tRPC for an end-to-end type-safe API, Zod, TanStack Query, FAISS (`faiss-node`), OpenAI `text-embedding-3-small` + `gpt-4o-mini`, LangChain text splitters, and Tailwind CSS.
+
+→ [View project](./Rag-Youtube-Chat)
+
+---
+
+### Blog-Into-Video-Content — Article to Short-Form Video
+
+Turns any article URL into a vertical short video (Instagram Reel / TikTok style). Exa AI extracts and cleans the article text, GPTScript orchestrates OpenAI to write a 3-part TL;DR script and generate a b-roll image and voiceover for each part, the voiceovers are transcribed to word-level timestamps, and ffmpeg renders the images, audio, and animated captions into the final video.
+
+Built with Node.js, Express, GPTScript, OpenAI (text, image, speech, and transcription), Exa AI, ffmpeg, and a React + TypeScript + Vite + Tailwind CSS frontend.
+
+→ [View project](./Blog-Into-Video-Content)
+
+---
+
 ## Stack Overview
 
 | Project | AI | Backend | Frontend |
@@ -48,3 +68,5 @@ A library of production automation workflows built without custom backend code. 
 | AI-HR | OpenAI GPT-4o | Puter.js (serverless) | React + TypeScript |
 | AI-VC | OpenAI GPT-4o | Python + FastAPI + LangGraph | React + Vite |
 | No-Code Workflows | — | n8n / Zapier | — |
+| Rag-Youtube-Chat | OpenAI GPT-4o-mini + embeddings · FAISS | Next.js 16 + tRPC (Node.js) | React 19 + TypeScript + TanStack Query |
+| Blog-Into-Video-Content | OpenAI (text, image, TTS, STT) · Exa AI | Node.js + Express + GPTScript + ffmpeg | React + TypeScript + Vite |
